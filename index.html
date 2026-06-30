@@ -642,55 +642,119 @@
           <h2 id="testimonials-heading">Trusted by Global Importers</h2>
         </div>
 
-        <div class="testimonial-grid">
-          <article class="testimonial-card">
-            <div class="testimonial-stars" aria-label="5 star rating">★★★★★</div>
-            <p>
-              Silver Wings Exim has been consistent with product quality,
-              documentation and delivery timelines. Their team understands
-              export requirements very well.
-            </p>
-            <div class="testimonial-author">
-              <span>AM</span>
-              <div>
-                <strong>Ahmed M.</strong>
-                <small>Food Importer, UAE</small>
-              </div>
-            </div>
-          </article>
+        <div class="testimonial-slider-container">
+          <button class="slider-btn prev-btn" aria-label="Previous testimonial" id="testimonial-prev">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+            </svg>
+          </button>
 
-          <article class="testimonial-card">
-            <div class="testimonial-stars" aria-label="5 star rating">★★★★★</div>
-            <p>
-              We sourced spices and dehydrated products through them. Packaging,
-              communication and shipment coordination were smooth from start to
-              finish.
-            </p>
-            <div class="testimonial-author">
-              <span>RS</span>
-              <div>
-                <strong>R. Sharma</strong>
-                <small>Wholesale Buyer, Singapore</small>
-              </div>
-            </div>
-          </article>
+          <div class="testimonial-slider-viewport">
+            <div class="testimonial-slider-track" id="testimonial-track">
+              <article class="testimonial-card">
+                <div class="testimonial-stars" aria-label="5 star rating">★★★★★</div>
+                <p>
+                  Silver Wings Exim has been consistent with product quality,
+                  documentation and delivery timelines. Their team understands
+                  export requirements very well.
+                </p>
+                <div class="testimonial-author">
+                  <span>AM</span>
+                  <div>
+                    <strong>Ahmed M.</strong>
+                    <small>Food Importer, UAE</small>
+                  </div>
+                </div>
+              </article>
 
-          <article class="testimonial-card">
-            <div class="testimonial-stars" aria-label="5 star rating">★★★★★</div>
-            <p>
-              Their product range and pricing helped us build a reliable supply
-              channel. We appreciate their transparent updates and professional
-              support.
-            </p>
-            <div class="testimonial-author">
-              <span>LK</span>
-              <div>
-                <strong>Lucas K.</strong>
-                <small>Distribution Partner, Europe</small>
-              </div>
+              <article class="testimonial-card">
+                <div class="testimonial-stars" aria-label="5 star rating">★★★★★</div>
+                <p>
+                  We sourced spices and dehydrated products through them. Packaging,
+                  communication and shipment coordination were smooth from start to
+                  finish.
+                </p>
+                <div class="testimonial-author">
+                  <span>RS</span>
+                  <div>
+                    <strong>R. Sharma</strong>
+                    <small>Wholesale Buyer, Singapore</small>
+                  </div>
+                </div>
+              </article>
+
+              <article class="testimonial-card">
+                <div class="testimonial-stars" aria-label="5 star rating">★★★★★</div>
+                <p>
+                  Their product range and pricing helped us build a reliable supply
+                  channel. We appreciate their transparent updates and professional
+                  support.
+                </p>
+                <div class="testimonial-author">
+                  <span>LK</span>
+                  <div>
+                    <strong>Lucas K.</strong>
+                    <small>Distribution Partner, Europe</small>
+                  </div>
+                </div>
+              </article>
+
+              <article class="testimonial-card">
+                <div class="testimonial-stars" aria-label="5 star rating">★★★★★</div>
+                <p>
+                  Excellent quality control. The confectionery and organic items
+                  arrived perfectly fresh and well-packed. Truly a professional
+                  export partner.
+                </p>
+                <div class="testimonial-author">
+                  <span>SL</span>
+                  <div>
+                    <strong>Sophia L.</strong>
+                    <small>Organic Food Distributor, Germany</small>
+                  </div>
+                </div>
+              </article>
+
+              <article class="testimonial-card">
+                <div class="testimonial-stars" aria-label="5 star rating">★★★★★</div>
+                <p>
+                  We have been importing premium Basmati rice and spices. Timely
+                  delivery and superb documentation support every single time.
+                </p>
+                <div class="testimonial-author">
+                  <span>KM</span>
+                  <div>
+                    <strong>K. Al-Mansoor</strong>
+                    <small>Commodity Trader, Saudi Arabia</small>
+                  </div>
+                </div>
+              </article>
+
+              <article class="testimonial-card">
+                <div class="testimonial-stars" aria-label="5 star rating">★★★★★</div>
+                <p>
+                  Their range of fox nuts (makhana) and dehydrated onions is highly
+                  popular in our stores. Consistent pricing and premium packaging.
+                </p>
+                <div class="testimonial-author">
+                  <span>DW</span>
+                  <div>
+                    <strong>David W.</strong>
+                    <small>Retail Chain Manager, Canada</small>
+                  </div>
+                </div>
+              </article>
             </div>
-          </article>
+          </div>
+
+          <button class="slider-btn next-btn" aria-label="Next testimonial" id="testimonial-next">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+            </svg>
+          </button>
         </div>
+
+        <div class="slider-dots" id="testimonial-dots" aria-label="Testimonial navigation indicators"></div>
       </section>
 
       <section class="contact-section" id="contact" aria-labelledby="contact-heading">
@@ -785,11 +849,18 @@
     <footer class="site-footer">
       <div class="footer-grid">
         <div class="footer-brand">
-          <img src="assets/logo.png" alt="Silver Wings Exim" />
+          <div class="footer-logo-box">
+            <img src="assets/logo.png" alt="Silver Wings Exim" />
+          </div>
           <p>
             Exporting quality Indian agro products, spices, foods and
             commodities with dependable global shipment support.
           </p>
+          <div class="footer-socials">
+            <a href="#" aria-label="LinkedIn" class="social-icon">in</a>
+            <a href="#" aria-label="Instagram" class="social-icon">ig</a>
+            <a href="#" aria-label="Facebook" class="social-icon">fb</a>
+          </div>
         </div>
 
         <div class="footer-column">
@@ -810,10 +881,25 @@
         </div>
 
         <div class="footer-column footer-contact">
-          <h2>Contact</h2>
-          <a href="tel:+919876543210">+91 98765 43210</a>
-          <a href="mailto:info@silverwingsexim.com">info@silverwingsexim.com</a>
-          <p>India to Global Markets</p>
+          <h2>Contact Us</h2>
+          <div class="footer-contact-item">
+            <span class="contact-icon phone-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+            </span>
+            <a href="tel:+919876543210">+91 98765 43210</a>
+          </div>
+          <div class="footer-contact-item">
+            <span class="contact-icon email-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </span>
+            <a href="mailto:info@silverwingsexim.com">info@silverwingsexim.com</a>
+          </div>
+          <div class="footer-contact-item">
+            <span class="contact-icon base-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            </span>
+            <p>India to Global Markets</p>
+          </div>
         </div>
       </div>
 
@@ -825,5 +911,6 @@
         </div>
       </div>
     </footer>
+    <script src="js/slider.js"></script>
   </body>
 </html>
