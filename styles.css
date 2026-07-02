@@ -1056,6 +1056,54 @@ a {
     url("assets/product/Spices.png") center / cover no-repeat;
 }
 
+.confectionery-hero {
+  background:
+    linear-gradient(90deg, rgba(16, 69, 43, 0.88) 0%, rgba(66, 45, 30, 0.74) 52%, rgba(116, 18, 16, 0.88) 100%),
+    url("assets/product/Confectionery.png") center / cover no-repeat;
+}
+
+.dehydrated-hero {
+  background:
+    linear-gradient(90deg, rgba(16, 69, 43, 0.88) 0%, rgba(66, 45, 30, 0.74) 52%, rgba(116, 18, 16, 0.88) 100%),
+    url("assets/product/Dehydrated Products.png") center / cover no-repeat;
+}
+
+.flour-hero {
+  background:
+    linear-gradient(90deg, rgba(16, 69, 43, 0.88) 0%, rgba(66, 45, 30, 0.74) 52%, rgba(116, 18, 16, 0.88) 100%),
+    url("assets/product/Flour.png") center / cover no-repeat;
+}
+
+.frozen-hero {
+  background:
+    linear-gradient(90deg, rgba(16, 69, 43, 0.88) 0%, rgba(66, 45, 30, 0.74) 52%, rgba(116, 18, 16, 0.88) 100%),
+    url("assets/product/Frozen.png") center / cover no-repeat;
+}
+
+.makhana-hero {
+  background:
+    linear-gradient(90deg, rgba(16, 69, 43, 0.88) 0%, rgba(66, 45, 30, 0.74) 52%, rgba(116, 18, 16, 0.88) 100%),
+    url("assets/product/Makhana  Fox Nuts.png") center / cover no-repeat;
+}
+
+.rice-hero {
+  background:
+    linear-gradient(90deg, rgba(16, 69, 43, 0.88) 0%, rgba(66, 45, 30, 0.74) 52%, rgba(116, 18, 16, 0.88) 100%),
+    url("assets/product/Rice.png") center / cover no-repeat;
+}
+
+.salt-hero {
+  background:
+    linear-gradient(90deg, rgba(16, 69, 43, 0.88) 0%, rgba(66, 45, 30, 0.74) 52%, rgba(116, 18, 16, 0.88) 100%),
+    url("assets/product/Salt.png") center / cover no-repeat;
+}
+
+.seeds-hero {
+  background:
+    linear-gradient(90deg, rgba(16, 69, 43, 0.88) 0%, rgba(66, 45, 30, 0.74) 52%, rgba(116, 18, 16, 0.88) 100%),
+    url("assets/product/Seeds.png") center / cover no-repeat;
+}
+
 .product-page-hero::before {
   content: "";
   position: absolute;
