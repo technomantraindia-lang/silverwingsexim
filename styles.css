@@ -1104,6 +1104,105 @@ a {
     url("assets/product/Seeds.png") center / cover no-repeat;
 }
 
+.certificate-hero {
+  background:
+    linear-gradient(90deg, rgba(16, 69, 43, 0.9) 0%, rgba(66, 45, 30, 0.78) 52%, rgba(116, 18, 16, 0.9) 100%),
+    radial-gradient(circle at 50% 120%, rgba(255, 216, 112, 0.18), transparent 42%);
+}
+
+.certificate-page {
+  padding: 58px 6vw 70px;
+  background:
+    radial-gradient(circle at 20% 16%, rgba(195, 137, 40, 0.08), transparent 26%),
+    linear-gradient(180deg, #fffdf9 0%, #f5efe7 100%);
+}
+
+.certificate-intro {
+  max-width: 760px;
+  margin: 0 auto 42px;
+  color: #5a4638;
+  font-size: 17px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.certificate-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(200px, 1fr));
+  gap: 34px 26px;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.certificate-card {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+}
+
+.certificate-frame {
+  width: 100%;
+  max-width: 260px;
+  aspect-ratio: 3 / 4;
+  display: grid;
+  place-items: center;
+  border: 12px solid var(--white);
+  border-radius: 14px;
+  background: linear-gradient(180deg, #fffaf2 0%, #f7efe3 100%);
+  box-shadow: 0 14px 28px rgba(73, 47, 24, 0.13);
+  overflow: hidden;
+}
+
+.certificate-frame img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  background: #fff;
+}
+
+.certificate-placeholder {
+  display: grid;
+  place-items: center;
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+  padding: 24px;
+  text-align: center;
+}
+
+.certificate-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 88px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  color: #68140f;
+  background: rgba(195, 137, 40, 0.16);
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.certificate-placeholder p {
+  margin: 0;
+  color: #6d5645;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.certificate-card h2 {
+  margin: 0;
+  color: #68140f;
+  font-family: "Times New Roman", Times, serif;
+  font-size: clamp(20px, 1.35vw, 24px);
+  font-weight: 800;
+  line-height: 1.12;
+  text-align: center;
+}
+
 .product-page-hero::before {
   content: "";
   position: absolute;
@@ -2187,6 +2286,15 @@ a {
     max-width: 760px;
   }
 
+  .certificate-page {
+    padding: 48px 24px 60px;
+  }
+
+  .certificate-grid {
+    grid-template-columns: repeat(2, minmax(180px, 1fr));
+    max-width: 760px;
+  }
+
   .why-choose {
     padding: 54px 24px 48px;
   }
@@ -2463,6 +2571,20 @@ a {
   .product-image-grid {
     grid-template-columns: repeat(2, minmax(128px, 1fr));
     gap: 24px 18px;
+  }
+
+  .certificate-page {
+    padding: 38px 16px 48px;
+  }
+
+  .certificate-grid {
+    grid-template-columns: 1fr;
+    gap: 24px 18px;
+  }
+
+  .certificate-intro {
+    font-size: 15px;
+    margin-bottom: 30px;
   }
 
   .product-image-card img {
@@ -3603,4 +3725,405 @@ a {
     background 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
     border-color 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
     box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* Quote Request Modal */
+body.quote-modal-open {
+  overflow: hidden;
+}
+
+.quote-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.28s ease, visibility 0.28s ease;
+}
+
+.quote-modal.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.quote-modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 10, 24, 0.72);
+  backdrop-filter: blur(4px);
+}
+
+.quote-modal-dialog {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 360px minmax(0, 1fr);
+  width: min(1040px, 100%);
+  max-height: calc(100vh - 48px);
+  border: 2px solid #d4a63a;
+  border-radius: 22px;
+  overflow: hidden;
+  background: #faf7f1;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.35);
+  transform: translateY(18px) scale(0.98);
+  transition: transform 0.28s ease;
+}
+
+.quote-modal.is-open .quote-modal-dialog {
+  transform: translateY(0) scale(1);
+}
+
+.quote-modal-info {
+  position: relative;
+  color: #fff;
+  background:
+  linear-gradient(180deg, rgba(8, 14, 28, 0.94) 0%, rgba(5, 10, 22, 0.98) 100%),
+  radial-gradient(circle at 20% 20%, rgba(212, 166, 58, 0.08), transparent 34%);
+}
+
+.quote-modal-info::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.16;
+  background-image:
+    linear-gradient(30deg, rgba(255, 255, 255, 0.18) 1px, transparent 1px),
+    linear-gradient(150deg, rgba(255, 255, 255, 0.14) 1px, transparent 1px);
+  background-size: 72px 72px;
+  pointer-events: none;
+}
+
+.quote-modal-info-inner {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  padding: 28px 24px 24px;
+  display: grid;
+  align-content: start;
+  gap: 18px;
+  overflow-y: auto;
+}
+
+.quote-modal-brand {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+.quote-modal-brand img {
+  width: 118px;
+  height: auto;
+  display: block;
+}
+
+.quote-modal-feature {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(212, 166, 58, 0.35);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+}
+
+.quote-modal-feature img {
+  width: 100%;
+  height: 150px;
+  display: block;
+  object-fit: cover;
+}
+
+.quote-modal-kicker {
+  margin: 4px 0 0;
+  color: #d4a63a;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.quote-modal-tagline {
+  margin: 0;
+  font-family: "Playfair Display", "Times New Roman", serif;
+  font-size: clamp(24px, 2.2vw, 30px);
+  line-height: 1.15;
+  font-weight: 700;
+}
+
+.quote-modal-contact-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.quote-modal-contact-card {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 14px;
+  border: 1px solid rgba(212, 166, 58, 0.45);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  color: inherit;
+}
+
+.quote-modal-contact-icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: rgba(212, 166, 58, 0.14);
+}
+
+.quote-modal-contact-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: #e8c56d;
+}
+
+.quote-modal-contact-text {
+  display: grid;
+  gap: 3px;
+}
+
+.quote-modal-contact-text strong {
+  color: #d4a63a;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+.quote-modal-contact-text span:last-child {
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.quote-modal-form-wrap {
+  position: relative;
+  background: #faf7f1;
+  overflow-y: auto;
+}
+
+.quote-modal-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 2;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #8a8175;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.quote-modal-close:hover {
+  color: #4d4338;
+}
+
+.quote-modal-form-content {
+  padding: 34px 34px 28px;
+}
+
+.quote-modal-form-content h2 {
+  margin: 0 0 10px;
+  color: #1a2233;
+  font-family: "Playfair Display", "Times New Roman", serif;
+  font-size: clamp(30px, 3vw, 38px);
+  line-height: 1.1;
+}
+
+.quote-modal-subtitle {
+  margin: 0 0 22px;
+  max-width: 520px;
+  color: #6f675d;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.quote-modal-form {
+  display: grid;
+  gap: 14px;
+}
+
+.quote-modal-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.quote-modal-field {
+  position: relative;
+  display: block;
+}
+
+.quote-modal-field-full {
+  grid-column: 1 / -1;
+}
+
+.quote-modal-field-icon {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  width: 18px;
+  height: 18px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.quote-modal-field-icon-top {
+  top: 16px;
+  transform: none;
+}
+
+.quote-modal-field-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: #b0a796;
+}
+
+.quote-modal-field input,
+.quote-modal-field select,
+.quote-modal-field textarea {
+  width: 100%;
+  border: 1px solid #d4a63a;
+  border-radius: 12px;
+  background: #fff;
+  color: #2f2a24;
+  font: inherit;
+  font-size: 14px;
+  padding: 14px 14px 14px 44px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.quote-modal-field textarea {
+  min-height: 112px;
+  resize: vertical;
+  padding-top: 14px;
+}
+
+.quote-modal-field input:focus,
+.quote-modal-field select:focus,
+.quote-modal-field textarea:focus {
+  border-color: #b8891f;
+  box-shadow: 0 0 0 3px rgba(212, 166, 58, 0.14);
+}
+
+.quote-modal-field select {
+  appearance: none;
+  cursor: pointer;
+}
+
+.quote-modal-select-arrow {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  color: #8a8175;
+  font-size: 18px;
+  pointer-events: none;
+}
+
+.quote-modal-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  margin-top: 4px;
+  padding: 15px 18px;
+  border: 0;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #c59335 0%, #e5c05b 100%);
+  color: #1f1a14;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(197, 147, 53, 0.28);
+}
+
+.quote-modal-submit:hover {
+  filter: brightness(1.03);
+}
+
+.quote-modal-submit-icon svg,
+.quote-modal-submit-arrow {
+  display: inline-flex;
+}
+
+.quote-modal-submit-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.quote-modal-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 12px 0 0;
+  color: #8d8478;
+  font-size: 13px;
+}
+
+.quote-modal-note-icon svg {
+  width: 16px;
+  height: 16px;
+  fill: #c59335;
+}
+
+@media (max-width: 920px) {
+  .quote-modal-dialog {
+    grid-template-columns: 1fr;
+    max-height: calc(100vh - 24px);
+  }
+
+  .quote-modal-info-inner {
+    padding: 22px 20px 18px;
+    gap: 14px;
+  }
+
+  .quote-modal-feature img {
+    height: 120px;
+  }
+
+  .quote-modal-contact-list {
+    grid-template-columns: 1fr;
+  }
+
+  .quote-modal-form-content {
+    padding: 26px 22px 22px;
+  }
+
+  .quote-modal-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .quote-modal {
+    padding: 10px;
+  }
+
+  .quote-modal-dialog {
+    border-radius: 16px;
+  }
+
+  .quote-modal-form-content h2 {
+    font-size: 28px;
+  }
 }
