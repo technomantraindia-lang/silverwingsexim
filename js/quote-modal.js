@@ -149,6 +149,360 @@
     document.body.classList.remove("quote-modal-open");
   }
 
+  function initMobileNavigation() {
+    var navbar = document.querySelector(".navbar");
+    var navLinks = document.querySelector(".nav-links");
+
+    if (!navbar || !navLinks || navbar.querySelector(".mobile-menu-toggle")) return;
+
+    var toggle = document.createElement("button");
+    toggle.className = "mobile-menu-toggle";
+    toggle.type = "button";
+    toggle.setAttribute("aria-label", "Open menu");
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.innerHTML = "<span></span><span></span><span></span>";
+
+    navbar.insertBefore(toggle, navLinks);
+
+    toggle.addEventListener("click", function () {
+      var isOpen = document.body.classList.toggle("mobile-nav-open");
+      toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      toggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+    });
+
+    navLinks.querySelectorAll(".dropdown > a").forEach(function (dropdownTrigger) {
+      dropdownTrigger.setAttribute("aria-expanded", "false");
+
+      dropdownTrigger.addEventListener("click", function (event) {
+        if (!window.matchMedia("(max-width: 760px)").matches) return;
+
+        event.preventDefault();
+        var dropdown = dropdownTrigger.closest(".dropdown");
+        var isOpen = dropdown.classList.toggle("is-mobile-open");
+
+        dropdownTrigger.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      });
+    });
+
+    navLinks.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        if (!window.matchMedia("(max-width: 760px)").matches) return;
+        if (link.closest(".dropdown") && link.parentElement.classList.contains("dropdown")) return;
+
+        document.body.classList.remove("mobile-nav-open");
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.setAttribute("aria-label", "Open menu");
+
+        navLinks.querySelectorAll(".dropdown.is-mobile-open").forEach(function (dropdown) {
+          dropdown.classList.remove("is-mobile-open");
+          var trigger = dropdown.querySelector(":scope > a");
+          if (trigger) {
+            trigger.setAttribute("aria-expanded", "false");
+          }
+        });
+      });
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        document.body.classList.remove("mobile-nav-open");
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.setAttribute("aria-label", "Open menu");
+
+        navLinks.querySelectorAll(".dropdown.is-mobile-open").forEach(function (dropdown) {
+          dropdown.classList.remove("is-mobile-open");
+          var trigger = dropdown.querySelector(":scope > a");
+          if (trigger) {
+            trigger.setAttribute("aria-expanded", "false");
+          }
+        });
+      }
+    });
+  }
+
+  function getContactUrl(productName) {
+    var base = isSubPage ? "contact.html" : "page/contact.html";
+    return base + "?product=" + encodeURIComponent(productName) + "#contactPageForm";
+  }
+
+  function getProductName(card) {
+    var title = card.querySelector("h2, h3");
+    if (title && title.textContent.trim()) {
+      return title.textContent.trim();
+    }
+
+    var image = card.querySelector("img[alt]");
+    if (image && image.alt.trim()) {
+      return image.alt.trim();
+    }
+
+    return "";
+  }
+
+  function initCategoryDirectLinks() {
+    document.querySelectorAll(".product-categories a.category-card[href], .product-image-page a.product-image-card[href]").forEach(function (card) {
+      card.addEventListener("click", function (event) {
+        if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        window.location.href = card.href;
+      }, true);
+    });
+  }
+
+  function initProductContactLinks() {
+    document.querySelectorAll(".product-image-page .product-image-card, .product-categories .category-card").forEach(function (card) {
+      var productName = getProductName(card);
+      if (!productName) return;
+
+      if (card.tagName.toLowerCase() === "a") return;
+
+      card.setAttribute("role", "link");
+      card.setAttribute("tabindex", "0");
+
+      card.setAttribute("data-product-enquiry", productName);
+
+      card.addEventListener("click", function (event) {
+        event.preventDefault();
+        window.location.href = getContactUrl(productName);
+      });
+
+      card.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          window.location.href = getContactUrl(productName);
+        }
+      });
+    });
+  }
+
+  function initProductCardAnimations() {
+    var cards = document.querySelectorAll(".product-image-page .product-image-card, .product-categories .category-card");
+    var revealClasses = ["reveal-left", "reveal-up", "reveal-right", "reveal-down"];
+
+    if (!cards.length) return;
+
+    cards.forEach(function (card, index) {
+      var hasRevealClass = revealClasses.some(function (className) {
+        return card.classList.contains(className);
+      });
+
+      if (!hasRevealClass) {
+        card.classList.add(revealClasses[index % revealClasses.length]);
+      }
+
+      card.style.transitionDelay = (index % 6) * 70 + "ms";
+      card.style.transitionDuration = "1.15s";
+    });
+
+    if (!("IntersectionObserver" in window)) {
+      cards.forEach(function (card) {
+        card.classList.add("revealed");
+      });
+      return;
+    }
+
+    var revealObserver = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("revealed");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      root: null,
+      rootMargin: "0px 0px -50px 0px",
+      threshold: 0.1
+    });
+
+    window.requestAnimationFrame(function () {
+      window.requestAnimationFrame(function () {
+        cards.forEach(function (card) {
+          if (!card.classList.contains("revealed")) {
+            revealObserver.observe(card);
+          }
+        });
+      });
+    });
+  }
+
+  function initCertificateAnimations() {
+    var intro = document.querySelector(".certificate-intro");
+    var cards = document.querySelectorAll(".certificate-card");
+    var revealClasses = ["reveal-left", "reveal-up", "reveal-right"];
+
+    if (intro) {
+      intro.classList.add("reveal-up");
+      intro.style.transitionDuration = "1.05s";
+    }
+
+    cards.forEach(function (card, index) {
+      var hasRevealClass = revealClasses.some(function (className) {
+        return card.classList.contains(className);
+      });
+
+      if (!hasRevealClass) {
+        card.classList.add(revealClasses[index % revealClasses.length]);
+      }
+
+      card.style.transitionDelay = (index % 3) * 110 + "ms";
+      card.style.transitionDuration = "1.15s";
+    });
+
+    var animatedItems = Array.prototype.slice.call(cards);
+    if (intro) {
+      animatedItems.unshift(intro);
+    }
+
+    if (!animatedItems.length) return;
+
+    if (!("IntersectionObserver" in window)) {
+      animatedItems.forEach(function (item) {
+        item.classList.add("revealed");
+      });
+      return;
+    }
+
+    var certificateObserver = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("revealed");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      root: null,
+      rootMargin: "0px 0px -40px 0px",
+      threshold: 0.12
+    });
+
+    window.requestAnimationFrame(function () {
+      window.requestAnimationFrame(function () {
+        animatedItems.forEach(function (item) {
+          if (!item.classList.contains("revealed")) {
+            certificateObserver.observe(item);
+          }
+        });
+      });
+    });
+  }
+
+  function initContactAnimations() {
+    var animatedItems = [];
+    var motionTiming = "cubic-bezier(0.165, 0.84, 0.44, 1)";
+    var pairs = [
+      [document.querySelector(".contact-hero .product-page-hero-content"), "reveal-left", 0],
+      [document.querySelector(".contact-form-col"), "reveal-left", 80],
+      [document.querySelector(".contact-info-col"), "reveal-right", 160],
+      [document.querySelector(".contact-map-card .contact-map-head"), "reveal-left", 0],
+      [document.querySelector(".contact-map-card .contact-map-frame"), "reveal-right", 140]
+    ];
+
+    pairs.forEach(function (item) {
+      var element = item[0];
+      if (!element) return;
+
+      element.classList.add(item[1]);
+      element.style.transitionDelay = item[2] + "ms";
+      element.style.transitionDuration = "1.15s";
+      element.style.transitionProperty = "opacity, transform, background, border-color, box-shadow";
+      element.style.transitionTimingFunction = motionTiming;
+      animatedItems.push(element);
+    });
+
+    document.querySelectorAll(".contact-main-form label").forEach(function (label, index) {
+      label.classList.add("reveal-up");
+      label.style.transitionDelay = 220 + (index % 7) * 65 + "ms";
+      label.style.transitionDuration = "0.95s";
+      label.style.transitionProperty = "opacity, transform";
+      label.style.transitionTimingFunction = motionTiming;
+      animatedItems.push(label);
+    });
+
+    document.querySelectorAll(".contact-info-block").forEach(function (block, index) {
+      block.classList.add(index % 2 === 0 ? "reveal-right" : "reveal-left");
+      block.style.transitionDelay = 260 + (index % 5) * 75 + "ms";
+      block.style.transitionDuration = "1s";
+      block.style.transitionProperty = "opacity, transform, background, border-color, box-shadow";
+      block.style.transitionTimingFunction = motionTiming;
+      animatedItems.push(block);
+    });
+
+    document.querySelectorAll(".contact-map-details div, .contact-social-links a, .contact-maps-link").forEach(function (item, index) {
+      item.classList.add("reveal-up");
+      item.style.transitionDelay = 180 + (index % 5) * 70 + "ms";
+      item.style.transitionDuration = "0.9s";
+      item.style.transitionProperty = "opacity, transform, background, border-color, box-shadow";
+      item.style.transitionTimingFunction = motionTiming;
+      animatedItems.push(item);
+    });
+
+    if (!animatedItems.length) return;
+
+    if (!("IntersectionObserver" in window)) {
+      animatedItems.forEach(function (item) {
+        item.classList.add("revealed");
+      });
+      return;
+    }
+
+    var contactObserver = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("revealed");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      root: null,
+      rootMargin: "0px 0px -35px 0px",
+      threshold: 0.08
+    });
+
+    window.requestAnimationFrame(function () {
+      window.requestAnimationFrame(function () {
+        animatedItems.forEach(function (item) {
+          if (!item.classList.contains("revealed")) {
+            contactObserver.observe(item);
+          }
+        });
+      });
+    });
+  }
+
+  function initContactProductPrefill() {
+    var params = new URLSearchParams(window.location.search);
+    var productName = params.get("product");
+    if (!productName) return;
+
+    var productField = document.querySelector('input[name="product"]');
+    if (productField) {
+      productField.value = productName;
+    }
+
+    var messageField = document.querySelector('#contactPageForm textarea[name="message"]');
+    if (messageField && !messageField.value.trim()) {
+      messageField.value = "I am interested in " + productName + ". Please share product details, pricing, packaging options, minimum order quantity, and export delivery information.";
+    }
+
+    var modalProductField = document.querySelector('[name="service"]');
+    if (modalProductField) {
+      var matchingOption = Array.prototype.find.call(modalProductField.options, function (option) {
+        return option.value.toLowerCase() === productName.toLowerCase();
+      });
+
+      if (matchingOption) {
+        modalProductField.value = matchingOption.value;
+      }
+    }
+
+    var modalMessageField = document.querySelector('#quoteModalForm textarea[name="message"]');
+    if (modalMessageField && !modalMessageField.value.trim()) {
+      modalMessageField.value = "I am interested in " + productName + ". Please share product details, pricing, packaging options, minimum order quantity, and export delivery information.";
+    }
+  }
+
   function init() {
     if (!document.getElementById("quoteModal")) {
       document.body.insertAdjacentHTML("beforeend", modalMarkup);
@@ -181,6 +535,14 @@
         form.reset();
       });
     }
+
+    initMobileNavigation();
+    initCategoryDirectLinks();
+    initProductContactLinks();
+    initProductCardAnimations();
+    initCertificateAnimations();
+    initContactAnimations();
+    initContactProductPrefill();
   }
 
   if (document.readyState === "loading") {
