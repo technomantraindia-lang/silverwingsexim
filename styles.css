@@ -1395,7 +1395,7 @@ a {
 
 .contact-map-section {
   padding: 12px 6vw 80px;
-  max-width: 1140px;
+  max-width: 1280px;
   margin: 0 auto;
 }
 
@@ -3391,6 +3391,7 @@ a {
 }
 
 .site-footer {
+  --footer-content-width: 1360px;
   color: rgba(255, 255, 255, 0.9);
   background:
     radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.04), transparent 32%),
@@ -3415,7 +3416,10 @@ a {
   display: grid;
   grid-template-columns: 1.5fr repeat(3, 1fr);
   gap: 28px;
-  padding: 44px 6vw 32px;
+  width: 100%;
+  max-width: var(--footer-content-width);
+  margin: 0 auto;
+  padding: 44px 24px 32px;
 }
 
 .footer-logo-box {
@@ -3596,9 +3600,13 @@ a {
   align-items: center;
   justify-content: space-between;
   gap: 14px;
-  padding: 14px 6vw;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 14px max(24px, calc((100% - var(--footer-content-width)) / 2));
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   background: var(--footer-green-dark-2);
+  box-sizing: border-box;
 }
 
 .footer-bottom p,
@@ -8082,250 +8090,155 @@ body.about-page-body .cta-section {
   }
 }
 
-/* About page intro + CEO spotlight */
+/* About page intro + CEO spotlight — reference layout */
 .about-intro-section {
-  position: relative;
-  overflow: hidden;
-  padding: 88px 6vw 96px;
-  background:
-    radial-gradient(circle at 0% 0%, rgba(195, 137, 40, 0.1), transparent 28%),
-    radial-gradient(circle at 100% 100%, rgba(23, 98, 55, 0.08), transparent 32%),
-    linear-gradient(180deg, #fffdf8 0%, #f8f0e4 100%);
-}
-
-.about-intro-section::before {
-  content: "";
-  position: absolute;
-  top: 48px;
-  right: -80px;
-  width: 260px;
-  height: 260px;
-  border-radius: 50%;
-  border: 1px solid rgba(195, 137, 40, 0.14);
-  pointer-events: none;
+  padding: 80px 24px 88px;
+  background: #faf9f6;
 }
 
 .about-intro-shell {
-  position: relative;
-  z-index: 1;
-  max-width: 1180px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
 .about-intro-grid {
   display: grid;
-  grid-template-columns: minmax(300px, 1.08fr) minmax(320px, 0.92fr);
-  gap: 56px 72px;
-  align-items: start;
+  grid-template-columns: minmax(300px, 44%) minmax(360px, 56%);
+  gap: 48px 56px;
+  align-items: center;
 }
 
 .about-intro-copy {
-  padding: 34px 34px 34px 30px;
-  border-radius: 20px;
-  border: 1px solid rgba(195, 137, 40, 0.14);
-  border-left: 4px solid var(--gold);
-  background: rgba(255, 255, 255, 0.82);
-  box-shadow: 0 20px 50px rgba(82, 61, 37, 0.08);
+  max-width: 480px;
 }
 
 .about-intro-label {
-  margin: 0 0 16px;
-  color: var(--gold-dark);
+  margin: 0 0 14px;
+  color: #b08d57;
   font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 2.6px;
+  font-weight: 700;
+  letter-spacing: 2.8px;
   text-transform: uppercase;
 }
 
-.about-intro-label-light {
-  color: #f4d38c;
-}
-
 .about-intro-copy h2 {
-  margin: 0 0 18px;
-  color: var(--navy);
+  margin: 0 0 16px;
+  color: #1a2b2b;
   font-family: "Playfair Display", "Times New Roman", serif;
-  font-size: clamp(30px, 3vw, 44px);
+  font-size: clamp(28px, 2.6vw, 40px);
   font-weight: 800;
-  line-height: 1.14;
+  line-height: 1.16;
 }
 
 .about-intro-line {
   display: block;
-  width: 64px;
-  height: 3px;
+  width: 48px;
+  height: 2px;
   margin-bottom: 22px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--gold) 0%, #e8c56d 100%);
+  background: #b08d57;
 }
 
 .about-intro-copy p {
   margin: 0 0 14px;
-  color: #4a4f57;
-  font-size: 15px;
-  line-height: 1.82;
+  color: #4a4a4a;
+  font-size: 14.5px;
+  line-height: 1.8;
 }
 
-.about-intro-copy p:last-of-type {
-  margin-bottom: 24px;
+.about-intro-copy p:last-child {
+  margin-bottom: 0;
 }
 
-.about-intro-highlights {
+.about-ceo-spotlight {
   display: grid;
-  gap: 10px;
-  margin: 0;
-  padding: 18px 0 0;
-  list-style: none;
-  border-top: 1px solid rgba(195, 137, 40, 0.16);
-}
-
-.about-intro-highlights li {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: #2f3f4f;
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.about-intro-highlight-icon {
-  display: inline-grid;
-  place-items: center;
-  width: 22px;
-  height: 22px;
-  flex-shrink: 0;
-  border-radius: 50%;
-  color: #fff;
-  background: linear-gradient(135deg, var(--green) 0%, #0d4a35 100%);
-  font-size: 11px;
-  font-weight: 800;
-}
-
-.about-ceo-card {
+  grid-template-columns: 42% 58%;
+  align-items: stretch;
+  width: 100%;
+  max-width: 620px;
+  justify-self: end;
   overflow: hidden;
-  border-radius: 22px;
-  border: 1px solid rgba(195, 137, 40, 0.16);
+  border-radius: 18px;
   background: #fff;
-  box-shadow:
-    0 24px 60px rgba(7, 53, 40, 0.14),
-    0 8px 20px rgba(82, 61, 37, 0.06);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
 }
 
-.about-ceo-card-top {
-  display: flex;
-  align-items: center;
-  gap: 22px;
-  padding: 28px 28px 24px;
-  color: #fff;
-  background:
-    radial-gradient(circle at 100% 0%, rgba(244, 211, 140, 0.22), transparent 42%),
-    linear-gradient(135deg, #073528 0%, #0d4a35 55%, #0a3629 100%);
+.about-ceo-spotlight-photo {
+  margin: 0;
+  overflow: hidden;
 }
 
-.about-ceo-avatar-wrap {
-  flex-shrink: 0;
-  padding: 4px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #f4d38c 0%, #c38928 100%);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
-}
-
-.about-ceo-avatar {
-  display: block;
-  width: 96px;
-  height: 96px;
-  border-radius: 50%;
+.about-ceo-spotlight-photo img {
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
   object-fit: cover;
-  object-position: 72% 18%;
-  border: 3px solid #fff;
+  object-position: 78% 22%;
+  display: block;
 }
 
-.about-ceo-card-meta h3 {
+.about-ceo-spotlight-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 28px 28px 24px 26px;
+}
+
+.about-ceo-spotlight-copy .about-intro-label {
+  margin-bottom: 10px;
+}
+
+.about-ceo-spotlight-copy h3 {
   margin: 0 0 6px;
-  color: #fff;
+  color: #1a2b2b;
   font-family: "Playfair Display", "Times New Roman", serif;
-  font-size: clamp(22px, 2vw, 28px);
+  font-size: clamp(20px, 1.8vw, 26px);
   font-weight: 800;
-  line-height: 1.15;
+  line-height: 1.2;
 }
 
 .about-ceo-title {
-  margin: 0;
-  color: #f4d38c;
+  margin: 0 0 14px;
+  color: #b08d57;
   font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.4px;
+  font-weight: 600;
 }
 
-.about-ceo-card-body {
-  position: relative;
-  padding: 30px 30px 26px;
-}
-
-.about-ceo-quote-mark {
-  position: absolute;
-  top: 14px;
-  left: 22px;
-  color: rgba(195, 137, 40, 0.18);
-  font-family: "Playfair Display", "Times New Roman", serif;
-  font-size: 72px;
-  line-height: 1;
-  pointer-events: none;
+.about-ceo-spotlight-copy .about-intro-line {
+  margin-bottom: 14px;
 }
 
 .about-ceo-message {
-  position: relative;
-  z-index: 1;
   margin: 0;
-  padding-left: 8px;
-  color: #4a4f57;
-  font-size: 15px;
-  line-height: 1.78;
-}
-
-.about-ceo-card-footer {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 16px;
-  margin-top: 22px;
-  padding-top: 18px;
-  border-top: 1px solid rgba(195, 137, 40, 0.14);
+  color: #4a4a4a;
+  font-size: 13.5px;
+  line-height: 1.72;
 }
 
 .about-ceo-signature {
-  margin: 0;
-  color: var(--gold-dark);
+  margin: 18px 0 0;
+  color: #b08d57;
   font-family: "Great Vibes", "Segoe Script", cursive;
-  font-size: clamp(30px, 3vw, 38px);
+  font-size: clamp(26px, 2.4vw, 32px);
   font-weight: 400;
   line-height: 1;
+  text-align: right;
 }
 
-.about-ceo-badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 7px 12px;
-  border-radius: 999px;
-  color: #0d4a35;
-  background: #f6f0e4;
-  border: 1px solid rgba(195, 137, 40, 0.2);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-@media (max-width: 1024px) {
+@media (max-width: 1100px) {
   .about-intro-grid {
     grid-template-columns: 1fr;
-    gap: 36px;
+    gap: 44px;
+    max-width: 680px;
+    margin: 0 auto;
   }
 
-  .about-ceo-card {
-    max-width: 620px;
-    margin: 0 auto;
+  .about-intro-copy {
+    max-width: none;
+  }
+
+  .about-ceo-spotlight {
+    max-width: none;
+    justify-self: stretch;
   }
 }
 
@@ -8334,35 +8247,25 @@ body.about-page-body .cta-section {
     padding: 56px 16px 64px;
   }
 
-  .about-intro-copy {
-    padding: 24px 20px 24px 18px;
-    border-radius: 16px;
+  .about-intro-grid {
+    gap: 32px;
   }
 
-  .about-ceo-card-top {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-    padding: 24px 22px 20px;
+  .about-ceo-spotlight {
+    grid-template-columns: 1fr;
   }
 
-  .about-ceo-avatar {
-    width: 88px;
-    height: 88px;
+  .about-ceo-spotlight-photo img {
+    min-height: 240px;
+    max-height: 280px;
+    object-position: center 20%;
   }
 
-  .about-ceo-card-body {
+  .about-ceo-spotlight-copy {
     padding: 24px 22px 22px;
   }
 
-  .about-ceo-quote-mark {
-    font-size: 56px;
-    top: 10px;
-    left: 14px;
-  }
-
-  .about-ceo-card-footer {
-    flex-direction: column;
-    align-items: flex-start;
+  .about-ceo-signature {
+    text-align: left;
   }
 }
