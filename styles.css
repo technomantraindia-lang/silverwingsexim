@@ -18,8 +18,15 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 body {
   margin: 0;
+  overflow-x: hidden;
+  width: 100%;
   color: var(--text);
   background: var(--white);
   font-family: Inter, Arial, sans-serif;
@@ -3909,7 +3916,7 @@ a {
   }
 
   .hero-copy {
-    width: min(430px, calc(100vw - 32px));
+    width: min(430px, calc(100% - 32px));
     margin-left: 16px;
     padding-top: 24px;
   }
@@ -5211,6 +5218,13 @@ a {
 
 .reveal-down {
   transform: translateY(-50px);
+}
+
+@media (max-width: 760px) {
+  .reveal-left,
+  .reveal-right {
+    transform: translateY(28px);
+  }
 }
 
 /* Revealed State */
