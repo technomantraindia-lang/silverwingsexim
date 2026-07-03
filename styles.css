@@ -3443,11 +3443,12 @@ a {
 }
 
 .footer-brand p {
-  max-width: 360px;
-  margin: 14px 0 16px;
-  font-size: 14px;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.76);
+  max-width: 400px;
+  margin: 16px 0 18px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.88);
 }
 
 .footer-socials {
@@ -3482,7 +3483,7 @@ a {
   margin: 0 0 14px;
   color: var(--white);
   font-family: "Times New Roman", Times, serif;
-  font-size: 20px;
+  font-size: 22px;
   position: relative;
   padding-bottom: 8px;
   font-weight: 700;
@@ -3500,9 +3501,9 @@ a {
 
 .footer-column a {
   display: block;
-  margin: 0 0 9px;
-  color: rgba(255, 255, 255, 0.76);
-  font-size: 14px;
+  margin: 0 0 10px;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 15px;
   font-weight: 500;
   transition: all 0.25s ease;
   position: relative;
@@ -3539,8 +3540,8 @@ a {
   margin: 0;
   padding: 0;
   display: block;
-  color: rgba(255, 255, 255, 0.76);
-  font-size: 15px;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 16px;
   font-weight: 600;
   line-height: 1.5;
   transition: all 0.25s ease;
@@ -3612,8 +3613,8 @@ a {
 .footer-bottom p,
 .footer-bottom a {
   margin: 0;
-  color: rgba(255, 255, 255, 0.72);
-  font-size: 14px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 15px;
   font-weight: 600;
 }
 
@@ -7250,16 +7251,17 @@ body.about-page-body .cta-section {
   .footer-brand p {
     max-width: 100%;
     margin-bottom: 18px;
+    font-size: 15px;
   }
 
   .footer-column h2 {
     margin-bottom: 16px;
-    font-size: 19px;
+    font-size: 20px;
   }
 
   .footer-column a {
     margin-bottom: 10px;
-    font-size: 14px;
+    font-size: 15px;
   }
 
   .footer-contact {
@@ -7470,10 +7472,10 @@ body.about-page-body .cta-section {
   }
 
   .footer-brand p {
-    max-width: 330px;
-    margin: 12px auto 14px;
-    font-size: 14px;
-    line-height: 1.55;
+    max-width: 340px;
+    margin: 14px auto 16px;
+    font-size: 15px;
+    line-height: 1.6;
   }
 
   .footer-socials {
