@@ -478,6 +478,93 @@
     });
   }
 
+  function initAboutPageAnimations() {
+    if (!document.body.classList.contains("about-page-body")) return;
+
+    var animatedItems = [];
+    var motionTiming = "cubic-bezier(0.165, 0.84, 0.44, 1)";
+    var pairs = [
+      [document.querySelector(".about-intro-copy"), "reveal-left", 0],
+      [document.querySelector(".about-company-card"), "reveal-right", 120],
+      [document.querySelector(".about-leadership-card"), "reveal-up", 80],
+      [document.querySelector(".about-manager-card"), "reveal-up", 120],
+      [document.querySelector(".about-mv-header"), "reveal-up", 0],
+      [document.querySelector(".about-global-copy"), "reveal-left", 0],
+      [document.querySelector(".about-global-map"), "reveal-right", 140]
+    ];
+
+    pairs.forEach(function (item) {
+      var element = item[0];
+      if (!element) return;
+
+      element.classList.add(item[1]);
+      element.style.transitionDelay = item[2] + "ms";
+      element.style.transitionDuration = "1.05s";
+      element.style.transitionProperty = "opacity, transform, background, border-color, box-shadow";
+      element.style.transitionTimingFunction = motionTiming;
+      animatedItems.push(element);
+    });
+
+    document.querySelectorAll(".about-value-card").forEach(function (card, index) {
+      card.classList.add("reveal-up");
+      card.style.transitionDelay = 80 + (index % 6) * 75 + "ms";
+      card.style.transitionDuration = "0.95s";
+      card.style.transitionProperty = "opacity, transform, background, border-color, box-shadow";
+      card.style.transitionTimingFunction = motionTiming;
+      animatedItems.push(card);
+    });
+
+    document.querySelectorAll(".about-mv-card").forEach(function (card, index) {
+      card.classList.add(index % 2 === 0 ? "reveal-left" : "reveal-right");
+      card.style.transitionDelay = 100 + index * 120 + "ms";
+      card.style.transitionDuration = "1.05s";
+      card.style.transitionProperty = "opacity, transform, background, border-color, box-shadow";
+      card.style.transitionTimingFunction = motionTiming;
+      animatedItems.push(card);
+    });
+
+    document.querySelectorAll(".about-global-stat").forEach(function (stat, index) {
+      stat.classList.add("reveal-up");
+      stat.style.transitionDelay = 120 + (index % 4) * 80 + "ms";
+      stat.style.transitionDuration = "0.9s";
+      stat.style.transitionProperty = "opacity, transform, background, border-color, box-shadow";
+      stat.style.transitionTimingFunction = motionTiming;
+      animatedItems.push(stat);
+    });
+
+    if (!animatedItems.length) return;
+
+    if (!("IntersectionObserver" in window)) {
+      animatedItems.forEach(function (item) {
+        item.classList.add("revealed");
+      });
+      return;
+    }
+
+    var aboutObserver = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("revealed");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      root: null,
+      rootMargin: "0px 0px -45px 0px",
+      threshold: 0.08
+    });
+
+    window.requestAnimationFrame(function () {
+      window.requestAnimationFrame(function () {
+        animatedItems.forEach(function (item) {
+          if (!item.classList.contains("revealed")) {
+            aboutObserver.observe(item);
+          }
+        });
+      });
+    });
+  }
+
   function initContactProductPrefill() {
     var params = new URLSearchParams(window.location.search);
     var productName = params.get("product");
@@ -554,6 +641,7 @@
     initProductCardAnimations();
     initCertificateAnimations();
     initContactAnimations();
+    initAboutPageAnimations();
     initContactProductPrefill();
     initFloatingWhatsApp();
   }

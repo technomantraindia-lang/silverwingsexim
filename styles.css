@@ -2188,8 +2188,7 @@ a {
 
 .about-hero {
   background:
-    linear-gradient(90deg, rgba(16, 69, 43, 0.88) 0%, rgba(66, 45, 30, 0.74) 52%, rgba(116, 18, 16, 0.88) 100%),
-    url("assets/about.png") center / cover no-repeat;
+    linear-gradient(90deg, rgba(16, 69, 43, 0.88) 0%, rgba(66, 45, 30, 0.74) 52%, rgba(116, 18, 16, 0.88) 100%);
 }
 
 /* About page sections */
@@ -6556,8 +6555,7 @@ body.quote-modal-open {
   min-height: 340px;
   padding: 88px 24px 80px;
   background:
-    linear-gradient(135deg, rgba(7, 53, 40, 0.9) 0%, rgba(10, 74, 53, 0.85) 100%),
-    url("assets/about banera .png") center / cover no-repeat;
+    linear-gradient(135deg, rgba(7, 53, 40, 0.9) 0%, rgba(10, 74, 53, 0.85) 100%);
 }
 
 .about-page-body .about-page-who {
@@ -6907,8 +6905,7 @@ body.about-page-body .about-page-main {
 body.about-page-body .about-hero {
   min-height: 330px !important;
   background:
-    linear-gradient(90deg, rgba(16, 69, 43, 0.9) 0%, rgba(72, 52, 26, 0.74) 48%, rgba(116, 18, 16, 0.88) 100%),
-    url("assets/about.png") center / cover no-repeat !important;
+    linear-gradient(90deg, rgba(16, 69, 43, 0.9) 0%, rgba(72, 52, 26, 0.74) 48%, rgba(116, 18, 16, 0.88) 100%) !important;
 }
 
 body.about-page-body .about-page-who {
@@ -8232,9 +8229,77 @@ body.about-page-body .about-page-main {
 }
 
 body.about-page-body .about-hero {
+  min-height: 315px;
+  display: grid;
+  place-items: center;
+  padding: 72px 24px 68px;
+  color: var(--white);
+  text-align: center;
   background:
-    linear-gradient(135deg, rgba(26, 47, 74, 0.88) 0%, rgba(15, 92, 66, 0.82) 100%),
-    url("assets/about banera .png") center / cover no-repeat;
+    linear-gradient(90deg, rgba(16, 69, 43, 0.9) 0%, rgba(66, 45, 30, 0.78) 52%, rgba(116, 18, 16, 0.9) 100%),
+    radial-gradient(circle at 50% 120%, rgba(255, 216, 112, 0.18), transparent 42%);
+}
+
+body.about-page-body .about-hero .product-page-hero-content {
+  width: auto;
+}
+
+body.about-page-body .about-hero::before {
+  animation: aboutHeroPattern 8s ease-in-out infinite alternate;
+}
+
+body.about-page-body .about-hero .product-page-hero-content {
+  animation: aboutHeroTextIn 0.9s ease backwards;
+}
+
+body.about-page-body .about-company-card:hover,
+body.about-page-body .about-leadership-card:hover,
+body.about-page-body .about-manager-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 58px rgba(7, 53, 40, 0.28);
+}
+
+body.about-page-body .about-company-card.revealed:hover,
+body.about-page-body .about-leadership-card.revealed:hover,
+body.about-page-body .about-manager-card.revealed:hover {
+  transform: translateY(-6px) !important;
+}
+
+body.about-page-body .about-company-card,
+body.about-page-body .about-leadership-card,
+body.about-page-body .about-manager-card {
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+@keyframes aboutHeroTextIn {
+  from {
+    opacity: 0;
+    transform: translateY(22px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes aboutHeroPattern {
+  from {
+    opacity: 0.12;
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 0.24;
+    transform: scale(1.04);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.about-page-body .about-hero::before,
+  body.about-page-body .about-hero .product-page-hero-content {
+    animation: none;
+  }
 }
 
 /* — Intro / Who We Are — */
@@ -8450,20 +8515,26 @@ body.about-page-body .about-hero {
 }
 
 .about-leadership-card {
+  position: relative;
   display: grid;
   grid-template-columns: 260px 1fr;
   overflow: hidden;
+  border: 1.5px solid rgba(195, 137, 40, 0.72);
   border-radius: 16px;
-  background: #fff;
-  box-shadow: 0 12px 40px rgba(26, 43, 60, 0.07);
-  border: 1px solid rgba(26, 47, 74, 0.08);
-  box-shadow: 0 10px 36px rgba(26, 47, 74, 0.06);
+  background:
+    radial-gradient(circle at 92% 18%, rgba(195, 137, 40, 0.16) 0%, transparent 24%),
+    radial-gradient(circle at 12% 80%, rgba(255, 255, 255, 0.06) 0%, transparent 30%),
+    linear-gradient(135deg, #073528 0%, #064431 48%, #03291f 100%);
+  box-shadow: 0 18px 46px rgba(7, 53, 40, 0.24);
 }
 
 .about-leadership-photo {
-  margin: 0;
+  margin: 22px 0 22px 22px;
   overflow: hidden;
-  background: linear-gradient(180deg, var(--about-navy) 0%, #243d5c 100%);
+  border: 1.5px solid rgba(195, 137, 40, 0.75);
+  border-radius: 10px;
+  background: linear-gradient(180deg, #0b241c 0%, #143d30 100%);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
 }
 
 .about-leadership-photo img {
@@ -8485,7 +8556,7 @@ body.about-page-body .about-hero {
 
 .about-leadership-label {
   margin: 0 0 8px;
-  color: var(--about-gold);
+  color: #d8a44b;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 3px;
@@ -8498,8 +8569,8 @@ body.about-page-body .about-hero {
   right: 32px;
   width: 72px;
   height: 60px;
-  color: var(--about-gold);
-  opacity: 0.12;
+  color: #d8a44b;
+  opacity: 0.16;
   pointer-events: none;
 }
 
@@ -8510,7 +8581,7 @@ body.about-page-body .about-hero {
 
 .about-leadership-copy h2 {
   margin: 0 0 10px;
-  color: var(--about-navy);
+  color: #fff;
   font-family: "Playfair Display", "Times New Roman", serif;
   font-size: clamp(24px, 2.2vw, 32px);
   font-weight: 800;
@@ -8522,12 +8593,12 @@ body.about-page-body .about-hero {
   width: 44px;
   height: 2px;
   margin-bottom: 18px;
-  background: var(--about-gold);
+  background: #c38928;
 }
 
 .about-leadership-body p {
   margin: 0 0 12px;
-  color: var(--about-text);
+  color: rgba(255, 255, 255, 0.86);
   font-size: 15px;
   line-height: 1.78;
 }
@@ -8535,12 +8606,12 @@ body.about-page-body .about-hero {
 .about-leadership-footer {
   margin-top: 20px;
   padding-top: 18px;
-  border-top: 1px solid rgba(184, 146, 106, 0.2);
+  border-top: 1px solid rgba(195, 137, 40, 0.26);
 }
 
 .about-leadership-signature {
   margin: 0 0 4px !important;
-  color: var(--about-gold) !important;
+  color: #d8a44b !important;
   font-family: "Great Vibes", "Segoe Script", cursive;
   font-size: clamp(26px, 2.4vw, 32px) !important;
   font-weight: 400 !important;
@@ -8549,9 +8620,114 @@ body.about-page-body .about-hero {
 
 .about-leadership-role {
   margin: 0 !important;
-  color: #6b7280 !important;
+  color: rgba(255, 255, 255, 0.76) !important;
   font-size: 13px !important;
   font-weight: 600 !important;
+}
+
+/* Manager */
+.about-manager-section {
+  position: relative;
+  padding: 0 24px 88px;
+  background: linear-gradient(180deg, #eef1f5 0%, var(--about-bg-c) 100%);
+}
+
+.about-manager-shell {
+  max-width: var(--about-max);
+  margin: 0 auto;
+}
+
+.about-manager-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  overflow: hidden;
+  border: 1.5px solid rgba(195, 137, 40, 0.72);
+  border-radius: 16px;
+  background:
+    radial-gradient(circle at 92% 18%, rgba(195, 137, 40, 0.16) 0%, transparent 24%),
+    radial-gradient(circle at 12% 80%, rgba(255, 255, 255, 0.06) 0%, transparent 30%),
+    linear-gradient(135deg, #073528 0%, #064431 48%, #03291f 100%);
+  box-shadow: 0 18px 46px rgba(7, 53, 40, 0.24);
+}
+
+.about-manager-photo {
+  margin: 22px 0 22px 22px;
+  overflow: hidden;
+  border: 1.5px solid rgba(195, 137, 40, 0.75);
+  border-radius: 10px;
+  background: linear-gradient(180deg, #0b241c 0%, #143d30 100%);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+}
+
+.about-manager-photo img {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center 8%;
+}
+
+.about-manager-copy {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 36px 40px;
+}
+
+.about-manager-copy .about-leadership-label {
+  color: #d8a44b;
+}
+
+.about-manager-copy h2 {
+  margin: 0 0 10px;
+  color: #fff;
+  font-family: "Playfair Display", "Times New Roman", serif;
+  font-size: clamp(24px, 2.1vw, 32px);
+  font-weight: 800;
+  line-height: 1.16;
+}
+
+.about-manager-name {
+  margin: 0 0 4px;
+  color: #d8a44b;
+  font-family: "Playfair Display", "Times New Roman", serif;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.about-manager-role {
+  margin: 0 0 14px;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.about-manager-copy .about-leadership-line {
+  background: #c38928;
+}
+
+.about-manager-copy .about-leadership-body p {
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.about-manager-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.about-manager-highlights span {
+  padding: 8px 12px;
+  border-radius: 999px;
+  color: #fff;
+  background: rgba(195, 137, 40, 0.16);
+  border: 1px solid rgba(195, 137, 40, 0.42);
+  font-size: 12px;
+  font-weight: 700;
 }
 
 /* — Values — */
@@ -9254,7 +9430,19 @@ body.about-page-body .about-hero {
     margin: 0 auto;
   }
 
+  .about-manager-card {
+    grid-template-columns: 1fr;
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
   .about-leadership-photo img {
+    min-height: 280px;
+    max-height: 300px;
+  }
+
+  .about-manager-photo img {
     min-height: 280px;
     max-height: 300px;
   }
@@ -9267,13 +9455,38 @@ body.about-page-body .about-hero {
 }
 
 @media (max-width: 700px) {
+  body.about-page-body .about-hero {
+    min-height: 315px;
+  }
+
   .about-intro-section,
   .about-leadership-section,
+  .about-manager-section,
   .about-values-section,
   .about-mv-section,
   .about-global-section {
     padding-left: 16px;
     padding-right: 16px;
+  }
+
+  .about-manager-section {
+    padding-bottom: 72px;
+  }
+
+  .about-manager-card {
+    padding: 0;
+  }
+
+  .about-leadership-photo {
+    margin: 18px 18px 0;
+  }
+
+  .about-manager-photo {
+    margin: 18px 18px 0;
+  }
+
+  .about-manager-highlights {
+    justify-content: center;
   }
 
   .about-values-grid {
