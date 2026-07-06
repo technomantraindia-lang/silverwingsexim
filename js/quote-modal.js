@@ -23,7 +23,7 @@
                 '</span>' +
                 '<span class="quote-modal-contact-text">' +
                   '<strong>Call Us</strong>' +
-                  '<span>+91 98765 43210</span>' +
+                  '<span>+91 8780772092</span>' +
                 '</span>' +
               '</a>' +
               '<a class="quote-modal-contact-card" href="mailto:info@silverwingexim.com">' +
@@ -132,6 +132,13 @@
         '</section>' +
       '</div>' +
     '</div>';
+
+  var whatsappMarkup =
+    '<a class="floating-whatsapp" href="https://wa.me/918780772092?text=Hello%20Silver%20Wing%20Exim%2C%20I%20want%20to%20know%20more%20about%20your%20export%20products." target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">' +
+      '<span class="floating-whatsapp-icon" aria-hidden="true">' +
+        '<svg viewBox="0 0 32 32"><path d="M16.02 3C8.86 3 3.04 8.8 3.04 15.93c0 2.28.6 4.5 1.74 6.45L3 29l6.8-1.78a13 13 0 0 0 6.22 1.58C23.18 28.8 29 23 29 15.93S23.18 3 16.02 3zm0 23.6c-2 0-3.95-.54-5.66-1.56l-.4-.24-4.04 1.06L7 21.94l-.26-.42a10.7 10.7 0 0 1-1.5-5.59c0-5.9 4.84-10.72 10.78-10.72 5.95 0 10.78 4.81 10.78 10.72 0 5.9-4.83 10.67-10.78 10.67zm5.9-8c-.32-.16-1.9-.94-2.2-1.04-.3-.11-.52-.16-.74.16-.21.32-.84 1.04-1.03 1.25-.19.21-.38.24-.7.08-.32-.16-1.36-.5-2.6-1.6-.96-.86-1.6-1.91-1.8-2.24-.19-.32-.02-.5.14-.66.15-.15.32-.38.49-.57.16-.19.21-.32.32-.54.1-.21.05-.4-.03-.56-.08-.16-.73-1.76-1-2.4-.27-.64-.54-.55-.74-.56h-.63c-.21 0-.56.08-.86.4-.3.32-1.13 1.1-1.13 2.7s1.16 3.13 1.32 3.34c.16.21 2.28 3.48 5.54 4.88.77.34 1.38.54 1.85.69.78.25 1.48.21 2.04.13.62-.09 1.9-.77 2.17-1.52.27-.75.27-1.4.19-1.52-.08-.13-.3-.21-.62-.38z"/></svg>' +
+      '</span>' +
+    '</a>';
 
   function openModal() {
     var modal = document.getElementById("quoteModal");
@@ -503,6 +510,11 @@
     }
   }
 
+  function initFloatingWhatsApp() {
+    if (document.querySelector(".floating-whatsapp")) return;
+    document.body.insertAdjacentHTML("beforeend", whatsappMarkup);
+  }
+
   function init() {
     if (!document.getElementById("quoteModal")) {
       document.body.insertAdjacentHTML("beforeend", modalMarkup);
@@ -543,6 +555,7 @@
     initCertificateAnimations();
     initContactAnimations();
     initContactProductPrefill();
+    initFloatingWhatsApp();
   }
 
   if (document.readyState === "loading") {
