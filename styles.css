@@ -497,7 +497,7 @@ a {
   justify-content: flex-end;
   padding: clamp(30px, 3.8vw, 58px) clamp(56px, 5.4vw, 102px);
   overflow: hidden;
-  background: #f8ead4 url("assets/about.png") center top / 100% auto no-repeat;
+  background: #f8ead4 url("assets/about.png") center center / 100% 100% no-repeat;
 }
 
 .about-panel {
@@ -2604,7 +2604,7 @@ a {
   place-items: center;
   border: 12px solid var(--white);
   border-radius: 14px;
-  background: linear-gradient(180deg, #fffaf2 0%, #f7efe3 100%);
+  background: #fff;
   box-shadow: 0 14px 28px rgba(73, 47, 24, 0.13);
   overflow: hidden;
 }
@@ -2619,6 +2619,13 @@ a {
   background: #fff;
   pointer-events: none;
   transform: translateX(-50%);
+}
+
+.certificate-thumb-landscape {
+  top: 50%;
+  width: calc(100% + 40px);
+  height: 58%;
+  transform: translate(-50%, -50%);
 }
 
 .certificate-thumb-label {
@@ -2662,7 +2669,7 @@ a {
 .certificate-card:hover .certificate-frame {
   transform: none;
   border-color: var(--white);
-  background: linear-gradient(180deg, #fffaf2 0%, #f7efe3 100%);
+  background: #fff;
   box-shadow: 0 14px 28px rgba(73, 47, 24, 0.13);
 }
 
