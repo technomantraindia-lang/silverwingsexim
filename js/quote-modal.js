@@ -639,7 +639,6 @@
     initCategoryDirectLinks();
     initProductContactLinks();
     initProductCardAnimations();
-    initCertificateAnimations();
     initContactAnimations();
     initAboutPageAnimations();
     initContactProductPrefill();
