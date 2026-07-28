@@ -9,7 +9,7 @@
         '<aside class="quote-modal-info">' +
           '<div class="quote-modal-info-inner">' +
             '<div class="quote-modal-brand">' +
-              '<img loading="lazy" src="' + assetBase + 'logo.png" alt="Silver Wing Exim">' +
+              '<img width="512" height="512" decoding="async" loading="lazy" src="' + assetBase + 'logo-web.png" alt="Silver Wing Exim">' +
             '</div>' +
             '<div class="quote-modal-feature">' +
               '<img loading="lazy" src="' + assetBase + 'product/Mix Fruits.png" alt="Premium export products">' +
