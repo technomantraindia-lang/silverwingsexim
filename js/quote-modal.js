@@ -9,10 +9,10 @@
         '<aside class="quote-modal-info">' +
           '<div class="quote-modal-info-inner">' +
             '<div class="quote-modal-brand">' +
-              '<img src="' + assetBase + 'logo.png" alt="Silver Wing Exim">' +
+              '<img loading="lazy" src="' + assetBase + 'logo.png" alt="Silver Wing Exim">' +
             '</div>' +
             '<div class="quote-modal-feature">' +
-              '<img src="' + assetBase + 'product/Mix Fruits.png" alt="Premium export products">' +
+              '<img loading="lazy" src="' + assetBase + 'product/Mix Fruits.png" alt="Premium export products">' +
             '</div>' +
             '<p class="quote-modal-kicker">Trusted Partner In</p>' +
             '<h3 class="quote-modal-tagline">Export &bull; Agro &bull; Food Excellence</h3>' +
