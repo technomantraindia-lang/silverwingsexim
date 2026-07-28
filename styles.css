@@ -531,16 +531,26 @@ a {
 
 .about-section {
   position: relative;
-  min-height: clamp(560px, 57.14vw, 900px);
+  min-height: clamp(500px, 48vw, 760px);
   display: flex;
   align-items: center;
   justify-content: flex-end;
   padding: clamp(30px, 3.8vw, 58px) clamp(56px, 5.4vw, 102px);
   overflow: hidden;
-  background: #f8ead4 url("assets/about.png") center center / 100% 100% no-repeat;
+  background: #f8ead4;
+}
+
+.about-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("assets/about.png") center center / 100% 100% no-repeat;
+  pointer-events: none;
 }
 
 .about-panel {
+  position: relative;
+  z-index: 1;
   width: min(760px, 44vw);
   padding: clamp(26px, 2.6vw, 42px) clamp(32px, 3.4vw, 56px);
   border: 1px solid rgba(195, 137, 40, 0.68);
