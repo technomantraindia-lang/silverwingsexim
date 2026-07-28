@@ -506,7 +506,8 @@ a {
 
 .about-section {
   position: relative;
-  min-height: clamp(500px, 48vw, 760px);
+  min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -519,7 +520,7 @@ a {
   content: "";
   position: absolute;
   inset: 0;
-  background: url("assets/about.png") center center / 100% 100% no-repeat;
+  background: url("assets/about.png") center center / cover no-repeat;
   pointer-events: none;
 }
 
