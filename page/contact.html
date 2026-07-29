@@ -107,11 +107,11 @@
             <div class="contact-form-row">
               <label>
                 Product
-                <input type="text" name="product" placeholder="Product requirement">
+                <input type="text" name="product" placeholder="Product requirement" required>
               </label>
               <label>
                 Destination
-                <input type="text" name="destination" placeholder="Country / port">
+                <input type="text" name="destination" placeholder="Country / port" required>
               </label>
             </div>
             <label>
@@ -291,11 +291,5 @@
       </div>
     </footer>
   <script src="../js/quote-modal.js?v=mobile-products-toggle"></script>
-  <script>
-    document.getElementById("contactPageForm").addEventListener("submit", function (event) {
-      event.preventDefault();
-      this.reset();
-    });
-  </script>
 </body>
 </html>

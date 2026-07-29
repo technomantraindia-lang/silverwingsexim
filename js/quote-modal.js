@@ -1,6 +1,8 @@
 (function () {
   var isSubPage = /\/page\//.test(window.location.pathname);
   var assetBase = isSubPage ? "../assets/" : "assets/";
+  var WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
+  var WEB3FORMS_ACCESS_KEY = "62fa9914-a79f-416b-a863-bce030a0e8f1";
 
   var modalMarkup =
     '<div class="quote-modal" id="quoteModal" aria-hidden="true">' +
@@ -78,7 +80,7 @@
                   '<span class="quote-modal-field-icon" aria-hidden="true">' +
                     '<svg viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zm-2 12H4v-2h6v2zm0-4H4v-2h6v2zm0-4H4V9h6v2zm10 8h-8v-2h8v2zm0-4h-8v-2h8v2zm0-4h-8V9h8v2z"/></svg>' +
                   '</span>' +
-                  '<input type="text" name="company" placeholder="Company Name">' +
+                  '<input type="text" name="company" placeholder="Company Name" required>' +
                 '</label>' +
               '</div>' +
               '<label class="quote-modal-field quote-modal-field-full">' +
@@ -602,6 +604,152 @@
     document.body.insertAdjacentHTML("beforeend", whatsappMarkup);
   }
 
+  function getFormTitle(form) {
+    if (form.id === "quoteModalForm") return "Product Enquiry";
+    if (form.id === "contactPageForm") return "Contact Page Enquiry";
+    if (form.classList.contains("contact-form")) return "Home Page Requirement";
+    return "Website Enquiry";
+  }
+
+  function getSubmitButton(form) {
+    return form.querySelector('button[type="submit"], input[type="submit"]');
+  }
+
+  function setFormStatus(form, message, isError) {
+    var status = form.querySelector("[data-form-status]");
+    if (!status) {
+      status = document.createElement("p");
+      status.setAttribute("data-form-status", "");
+      status.setAttribute("role", "status");
+      status.setAttribute("aria-live", "polite");
+      form.appendChild(status);
+    }
+
+    status.textContent = message;
+    status.style.marginTop = "12px";
+    status.style.fontWeight = "700";
+    status.style.color = isError ? "#b42318" : "#18794e";
+  }
+
+  function ensureThankYouPopup() {
+    var popup = document.getElementById("thankYouPopup");
+    if (popup) return popup;
+
+    var markup =
+      '<div class="thank-you-popup" id="thankYouPopup" aria-hidden="true">' +
+        '<div class="thank-you-popup-backdrop" data-thank-you-close></div>' +
+        '<div class="thank-you-popup-card" role="dialog" aria-modal="true" aria-labelledby="thankYouPopupTitle">' +
+          '<button class="thank-you-popup-close" type="button" aria-label="Close thank you popup" data-thank-you-close>&times;</button>' +
+          '<div class="thank-you-popup-icon" aria-hidden="true">&#10003;</div>' +
+          '<h2 id="thankYouPopupTitle">Thank You</h2>' +
+          '<p>Your enquiry has been submitted successfully. Our team will contact you shortly.</p>' +
+          '<button class="thank-you-popup-action" type="button" data-thank-you-close>OK</button>' +
+        '</div>' +
+      '</div>';
+
+    document.body.insertAdjacentHTML("beforeend", markup);
+    popup = document.getElementById("thankYouPopup");
+
+    popup.querySelectorAll("[data-thank-you-close]").forEach(function (button) {
+      button.addEventListener("click", closeThankYouPopup);
+    });
+
+    return popup;
+  }
+
+  function openThankYouPopup() {
+    var popup = ensureThankYouPopup();
+    popup.classList.add("is-open");
+    popup.setAttribute("aria-hidden", "false");
+  }
+
+  function closeThankYouPopup() {
+    var popup = document.getElementById("thankYouPopup");
+    if (!popup) return;
+    popup.classList.remove("is-open");
+    popup.setAttribute("aria-hidden", "true");
+  }
+
+  function buildWeb3FormsPayload(form) {
+    var data = new FormData(form);
+    var title = getFormTitle(form);
+    var firstName = (data.get("firstName") || "").toString().trim();
+    var lastName = (data.get("lastName") || "").toString().trim();
+    var fullName = (data.get("fullName") || data.get("name") || (firstName + " " + lastName)).toString().trim();
+
+    data.set("access_key", WEB3FORMS_ACCESS_KEY);
+    data.set("from_name", fullName || "Silver Wing Exim Website");
+    data.set("form_name", title);
+
+    if (!data.get("subject")) {
+      data.set("subject", title + " - Silver Wing Exim");
+    }
+
+    return data;
+  }
+
+  function submitToWeb3Forms(form, onSuccess) {
+    if (form.dataset.web3formsReady === "true") return;
+    form.dataset.web3formsReady = "true";
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      var button = getSubmitButton(form);
+      var originalButtonText = button ? button.innerHTML : "";
+
+      if (button) {
+        button.disabled = true;
+        button.setAttribute("aria-busy", "true");
+        button.innerHTML = "Sending...";
+      }
+
+      fetch(WEB3FORMS_ENDPOINT, {
+        method: "POST",
+        body: buildWeb3FormsPayload(form)
+      })
+        .then(function (response) {
+          return response.json().then(function (result) {
+            if (!response.ok || !result.success) {
+              throw new Error(result.message || "Form submission failed.");
+            }
+            return result;
+          });
+        })
+        .then(function () {
+          form.reset();
+          openThankYouPopup();
+          setFormStatus(form, "Thank you. Your enquiry has been sent successfully.", false);
+          if (typeof onSuccess === "function") {
+            onSuccess();
+          }
+        })
+        .catch(function () {
+          setFormStatus(form, "Sorry, something went wrong. Please try again or contact us on WhatsApp.", true);
+        })
+        .finally(function () {
+          if (button) {
+            button.disabled = false;
+            button.removeAttribute("aria-busy");
+            button.innerHTML = originalButtonText;
+          }
+        });
+    });
+  }
+
+  function initWeb3Forms() {
+    document.querySelectorAll(".contact-form, #contactPageForm").forEach(function (form) {
+      submitToWeb3Forms(form);
+    });
+
+    var quoteForm = document.getElementById("quoteModalForm");
+    if (quoteForm) {
+      submitToWeb3Forms(quoteForm, function () {
+        closeModal();
+      });
+    }
+  }
+
   function init() {
     if (!document.getElementById("quoteModal")) {
       document.body.insertAdjacentHTML("beforeend", modalMarkup);
@@ -626,15 +774,6 @@
       }
     });
 
-    var form = document.getElementById("quoteModalForm");
-    if (form) {
-      form.addEventListener("submit", function (event) {
-        event.preventDefault();
-        closeModal();
-        form.reset();
-      });
-    }
-
     initMobileNavigation();
     initCategoryDirectLinks();
     initProductContactLinks();
@@ -643,6 +782,7 @@
     initAboutPageAnimations();
     initContactProductPrefill();
     initFloatingWhatsApp();
+    initWeb3Forms();
   }
 
   if (document.readyState === "loading") {
