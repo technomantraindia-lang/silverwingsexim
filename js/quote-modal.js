@@ -54,7 +54,10 @@
           '<div class="quote-modal-form-content">' +
             '<h2 id="quoteModalTitle">Get in Touch</h2>' +
             '<p class="quote-modal-subtitle">We\'d love to hear from you. Send us an enquiry and our team will get back to you shortly.</p>' +
-            '<form class="quote-modal-form" id="quoteModalForm">' +
+            '<form class="quote-modal-form" id="quoteModalForm" action="' + WEB3FORMS_ENDPOINT + '" method="POST">' +
+              '<input type="hidden" name="access_key" value="' + WEB3FORMS_ACCESS_KEY + '">' +
+              '<input type="hidden" name="form_name" value="Product Enquiry">' +
+              '<input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none;">' +
               '<div class="quote-modal-row">' +
                 '<label class="quote-modal-field">' +
                   '<span class="quote-modal-field-icon" aria-hidden="true">' +
@@ -676,10 +679,12 @@
     var firstName = (data.get("firstName") || "").toString().trim();
     var lastName = (data.get("lastName") || "").toString().trim();
     var fullName = (data.get("fullName") || data.get("name") || (firstName + " " + lastName)).toString().trim();
+    var email = (data.get("email") || "").toString().trim();
 
     data.set("access_key", WEB3FORMS_ACCESS_KEY);
     data.set("from_name", fullName || "Silver Wing Exim Website");
     data.set("form_name", title);
+    data.set("replyto", email);
 
     if (!data.get("subject")) {
       data.set("subject", title + " - Silver Wing Exim");
@@ -709,7 +714,9 @@
         body: buildWeb3FormsPayload(form)
       })
         .then(function (response) {
-          return response.json().then(function (result) {
+          return response.json().catch(function () {
+            return { success: false, message: "Web3Forms did not return a valid response." };
+          }).then(function (result) {
             if (!response.ok || !result.success) {
               throw new Error(result.message || "Form submission failed.");
             }
@@ -724,8 +731,8 @@
             onSuccess();
           }
         })
-        .catch(function () {
-          setFormStatus(form, "Sorry, something went wrong. Please try again or contact us on WhatsApp.", true);
+        .catch(function (error) {
+          setFormStatus(form, "Sorry, message could not be sent. " + (error && error.message ? error.message : "Please try again or contact us on WhatsApp."), true);
         })
         .finally(function () {
           if (button) {
